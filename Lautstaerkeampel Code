@@ -1,0 +1,32 @@
+int LautstaerkesensorPin = A0;
+int LEDgruenPin = 5;
+int LEDgelbPin = 2;
+int LEDrotPin = 6;
+int Lautstaerke = 0;
+void setup()
+{
+  pinMode (LautstaerkesensorPin, INPUT);
+  pinMode(LEDgruenPin, OUTPUT);
+  pinMode (LEDgelbPin, OUTPUT);
+  pinMode (LEDrotPin, OUTPUT); 
+  Serial.begin(9600);
+}
+void loop()
+{
+  Lautstaerke = analogRead(LautstaerkesensorPin); 
+  Serial.println (Lautstaerke); 
+  if (Lautstaerke < 200) { 
+    digitalWrite (LEDgruenPin, HIGH);
+    digitalWrite (LEDgelbPin, LOW);
+    digitalWrite (LEDrotPin, LOW); 
+  }
+  else if (Lautstaerke < 500) { 
+    digitalWrite (LEDgruenPin, LOW); // nur die LED anmachen, die leuchten soll 
+    digitalWrite (LEDgelbPin, HIGH);
+    digitalWrite(LEDrotPin, LOW); 
+  }
+   else if (Lautstaerke >=500) {         // hier sollte der Grenzwert  am höchsten sein, damit wirklich nur dann die rote LED angeht 
+    digitalWrite (LEDgruenPin, LOW);
+    digitalWrite (LEDgelbPin, LOW);
+    digitalWrite (LEDrotPin, HIGH); 
+} }
